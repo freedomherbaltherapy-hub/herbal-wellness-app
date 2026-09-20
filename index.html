@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Herbal Wellness App - educational information about herbs and general wellness." />
+  <title>Herbal Wellness App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-icon">🌿</span>
+      <div>
+        <h1>Herbal Wellness</h1>
+        <p>Learn • Explore • Stay Informed</p>
+      </div>
+    </div>
+    <button id="menuBtn" class="icon-btn" aria-label="Open menu">☰</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <span class="pill">🌱 Educational Wellness</span>
+        <h2>Explore the world of herbs.</h2>
+        <p>Discover educational information about herbs, traditional uses, preparation, and safety considerations.</p>
+        <a href="#herbs" class="primary-btn">Explore herbs</a>
+      </div>
+      <div class="hero-art">🌿</div>
+    </section>
+
+    <section class="search-section">
+      <label for="searchInput">Search the herb library</label>
+      <div class="search-box">
+        <span>🔎</span>
+        <input id="searchInput" type="search" placeholder="Try ginger, moringa, turmeric..." />
+      </div>
+    </section>
+
+    <section id="herbs" class="section">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">HERB LIBRARY</span>
+          <h2>Featured herbs</h2>
+        </div>
+        <span id="resultCount" class="count"></span>
+      </div>
+      <div id="herbGrid" class="herb-grid"></div>
+      <p id="emptyState" class="empty" hidden>No herbs matched your search.</p>
+    </section>
+
+    <section class="section wellness">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">WELLNESS</span>
+          <h2>Healthy habits</h2>
+        </div>
+      </div>
+      <div class="wellness-grid">
+        <article><span>💧</span><h3>Hydration</h3><p>Drink fluids regularly and pay attention to your body's needs.</p></article>
+        <article><span>🥗</span><h3>Balanced food</h3><p>Include a variety of foods rather than relying on a single herb or remedy.</p></article>
+        <article><span>😴</span><h3>Rest</h3><p>Good sleep and regular rest are important parts of general wellness.</p></article>
+      </div>
+    </section>
+
+    <section class="safety">
+      <h2>⚠️ Important safety information</h2>
+      <p>This app is for educational purposes and does not replace advice from a qualified healthcare professional. Herbs can interact with medicines and may not be suitable for everyone, including during pregnancy or for certain medical conditions. Check with a healthcare professional before using herbs for a health condition.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Herbal Wellness App</p>
+    <p>Educational information • Not medical advice</p>
+  </footer>
+
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <button id="closeModal" class="close-btn" aria-label="Close">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
