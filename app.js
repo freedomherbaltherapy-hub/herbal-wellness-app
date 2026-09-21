@@ -1,97 +1,18 @@
-const herbs = [
-  {
-    name: "Ginger", scientific: "Zingiber officinale", icon: "🫚",
-    summary: "A widely used culinary plant with a long history in traditional practices.",
-    uses: ["Used traditionally in food and beverages.", "Commonly studied for nausea and digestive symptoms.", "Used in many traditional preparations."],
-    safety: "Ginger can interact with some medicines and may not be appropriate for everyone. Ask a healthcare professional if you take regular medicines or have a health condition."
-  },
-  {
-    name: "Moringa", scientific: "Moringa oleifera", icon: "🌿",
-    summary: "A nutrient-containing plant whose leaves and other parts are used in food and traditional practices.",
-    uses: ["Leaves are used as food in several cultures.", "Traditionally incorporated into soups, teas, and other preparations.", "Contains a range of nutrients and plant compounds."],
-    safety: "Do not assume that traditional use means a product is safe or effective for treating disease. Discuss concentrated supplements with a healthcare professional."
-  },
-  {
-    name: "Turmeric", scientific: "Curcuma longa", icon: "🟠",
-    summary: "A spice commonly used in cooking and traditional herbal practices.",
-    uses: ["Common culinary spice.", "Curcumin and turmeric preparations have been studied in health research.", "Used traditionally in a variety of preparations."],
-    safety: "Concentrated turmeric/curcumin products can interact with medicines and may cause side effects. Food amounts are different from concentrated supplements."
-  },
-  {
-    name: "Neem", scientific: "Azadirachta indica", icon: "🌱",
-    summary: "A tree used in traditional practices in parts of Africa and Asia.",
-    uses: ["Leaves and other parts have traditional uses.", "Often discussed in traditional skin and personal-care practices.", "Used in some traditional preparations."],
-    safety: "Neem products are not interchangeable with food. Some preparations can be harmful, especially when swallowed. Seek professional advice before medicinal use."
-  },
-  {
-    name: "Hibiscus", scientific: "Hibiscus sabdariffa", icon: "🌺",
-    summary: "A flowering plant used in foods and beverages, including hibiscus drinks.",
-    uses: ["Used to make teas and beverages.", "Contains naturally occurring plant compounds.", "Traditional preparations vary by culture."],
-    safety: "Hibiscus may affect blood pressure or interact with medicines. If you use blood-pressure or other regular medicines, ask a healthcare professional."
-  },
-  {
-    name: "Garlic", scientific: "Allium sativum", icon: "🧄",
-    summary: "A common food plant with a long history of culinary and traditional use.",
-    uses: ["Widely used as a food seasoning.", "Garlic preparations have been studied for cardiovascular and other health outcomes.", "Used traditionally in many cultures."],
-    safety: "Large amounts or supplements can increase bleeding risk and may interact with medicines. Tell your clinician about supplements before surgery."
-  }
+const herbs=[
+{name:"Ginger",scientific:"Zingiber officinale",icon:"🫚",category:"Culinary & traditional",summary:"A widely used culinary plant with a long history in traditional practices.",uses:["Used traditionally in foods and beverages.","Ginger preparations have been studied for several health outcomes, including nausea.","Traditional preparation varies across cultures."],safety:"Concentrated products can interact with medicines. Ask a healthcare professional if you take regular medicines or have a health condition."},
+{name:"Moringa",scientific:"Moringa oleifera",icon:"🌿",category:"Food plants",summary:"A nutrient-containing plant whose leaves are used as food and in traditional practices.",uses:["Leaves are used as food in several cultures.","Used in soups, teas and other traditional preparations.","Contains a range of nutrients and plant compounds."],safety:"Food use is different from concentrated supplements. Discuss medicinal or concentrated products with a healthcare professional."},
+{name:"Turmeric",scientific:"Curcuma longa",icon:"🟠",category:"Culinary & traditional",summary:"A spice commonly used in cooking and traditional herbal practices.",uses:["Widely used as a culinary spice.","Turmeric and curcumin preparations have been studied in health research.","Traditional preparations vary."],safety:"Concentrated curcumin/turmeric products can cause side effects or interact with medicines. Food amounts are different from supplements."},
+{name:"Neem",scientific:"Azadirachta indica",icon:"🌱",category:"Traditional plants",summary:"A tree used in traditional practices in parts of Africa and Asia.",uses:["Leaves and other parts have traditional uses.","Often discussed in traditional skin and personal-care practices.","Traditional preparations vary considerably."],safety:"Some neem preparations can be harmful when swallowed. Do not assume traditional use means a product is safe. Seek professional advice before medicinal use."},
+{name:"Hibiscus",scientific:"Hibiscus sabdariffa",icon:"🌺",category:"Food & beverages",summary:"A flowering plant commonly used in foods and beverages.",uses:["Used to make teas and beverages.","Contains naturally occurring plant compounds.","Traditional preparations vary by culture."],safety:"Hibiscus may affect blood pressure and can interact with medicines. Ask a healthcare professional if you use regular medication."},
+{name:"Garlic",scientific:"Allium sativum",icon:"🧄",category:"Culinary & traditional",summary:"A common food plant with a long history of culinary and traditional use.",uses:["Widely used as a food seasoning.","Garlic preparations have been studied for cardiovascular and other health outcomes.","Used traditionally in many cultures."],safety:"Large amounts or supplements can increase bleeding risk and may interact with medicines. Tell your clinician about supplements before surgery."},
+{name:"Aloe vera",scientific:"Aloe vera",icon:"🌵",category:"Traditional plants",summary:"A succulent plant commonly associated with traditional skin-care practices.",uses:["Gel is commonly used topically in skin-care products.","Traditional uses differ by preparation and culture.","Commercial products may contain different parts of the plant."],safety:"Oral aloe products can have risks and are not interchangeable with topical gel. Ask a healthcare professional before oral use."},
+{name:"Lemongrass",scientific:"Cymbopogon citratus",icon:"🌾",category:"Food & beverages",summary:"An aromatic grass used in cooking, teas and traditional practices.",uses:["Used in foods and herbal beverages.","Aromatic leaves are used in traditional preparations.","Often included in soups and teas."],safety:"Concentrated oils are different from food use and may require special precautions. Stop use and seek advice if you develop a reaction."},
+{name:"Bitter leaf",scientific:"Vernonia amygdalina",icon:"🍃",category:"African traditional plants",summary:"An African plant commonly used as a vegetable and in traditional practices.",uses:["Leaves are used as food in parts of West Africa.","Traditional preparations vary, including soups and infusions.","Plant identity and preparation matter."],safety:"Traditional use does not establish safety or effectiveness for a specific disease. Discuss medicinal use with a qualified professional."},
+{name:"Scent leaf",scientific:"Ocimum gratissimum",icon:"🌿",category:"African traditional plants",summary:"An aromatic African herb used as a culinary plant and in traditional practices.",uses:["Used as a food herb in some West African cuisines.","Leaves are used in traditional preparations.","Often known by different local names."],safety:"Safety depends on preparation and amount. Concentrated extracts or oils should not be assumed equivalent to food use."}
 ];
-
-const grid = document.getElementById("herbGrid");
-const search = document.getElementById("searchInput");
-const count = document.getElementById("resultCount");
-const empty = document.getElementById("emptyState");
-const modal = document.getElementById("modal");
-const modalContent = document.getElementById("modalContent");
-const closeModal = document.getElementById("closeModal");
-
-function render(items) {
-  grid.innerHTML = items.map((h, i) => `
-    <article class="herb-card" data-index="${herbs.indexOf(h)}">
-      <div class="herb-icon">${h.icon}</div>
-      <h3>${h.name}</h3>
-      <div class="scientific">${h.scientific}</div>
-      <p>${h.summary}</p>
-      <div class="learn">View information →</div>
-    </article>
-  `).join("");
-  count.textContent = `${items.length} herb${items.length === 1 ? "" : "s"}`;
-  empty.hidden = items.length !== 0;
-  document.querySelectorAll(".herb-card").forEach(card => {
-    card.addEventListener("click", () => openHerb(Number(card.dataset.index)));
-  });
-}
-
-function openHerb(index) {
-  const h = herbs[index];
-  modalContent.innerHTML = `
-    <div class="herb-icon">${h.icon}</div>
-    <h2>${h.name}</h2>
-    <p class="scientific">${h.scientific}</p>
-    <p>${h.summary}</p>
-    <h3>Traditional / educational information</h3>
-    <ul>${h.uses.map(x => `<li>${x}</li>`).join("")}</ul>
-    <h3>Safety</h3>
-    <p>${h.safety}</p>
-    <p><strong>Reminder:</strong> This information is educational and is not a diagnosis or treatment recommendation.</p>
-  `;
-  modal.classList.add("show");
-  modal.setAttribute("aria-hidden", "false");
-}
-
-search.addEventListener("input", () => {
-  const q = search.value.trim().toLowerCase();
-  render(herbs.filter(h =>
-    `${h.name} ${h.scientific} ${h.summary} ${h.uses.join(" ")}`.toLowerCase().includes(q)
-  ));
-});
-
-closeModal.addEventListener("click", () => {
-  modal.classList.remove("show");
-  modal.setAttribute("aria-hidden", "true");
-});
-modal.addEventListener("click", e => {
-  if (e.target === modal) closeModal.click();
-});
-
-render(herbs);
+const categories=["All",...new Set(herbs.map(h=>h.category))],grid=document.getElementById("herbGrid"),search=document.getElementById("search"),count=document.getElementById("count"),empty=document.getElementById("empty"),categoryBar=document.getElementById("categoryBar"),modal=document.getElementById("modal"),modalBody=document.getElementById("modalBody");let activeCategory="All";
+categoryBar.innerHTML=categories.map(c=>`<button class="category ${c==="All"?"active":""}" data-cat="${c}">${c}</button>`).join("");categoryBar.querySelectorAll(".category").forEach(btn=>btn.addEventListener("click",()=>{activeCategory=btn.dataset.cat;categoryBar.querySelectorAll(".category").forEach(x=>x.classList.remove("active"));btn.classList.add("active");render()}));
+function filtered(){const q=search.value.trim().toLowerCase();return herbs.filter(h=>(activeCategory==="All"||h.category===activeCategory)&&(!q||[h.name,h.scientific,h.category,h.summary,...h.uses].join(" ").toLowerCase().includes(q)))}
+function render(){const items=filtered();grid.innerHTML=items.map(h=>{const i=herbs.indexOf(h);return `<article class="herb-card" data-index="${i}"><div class="herb-icon">${h.icon}</div><h3>${h.name}</h3><div class="scientific">${h.scientific}</div><p>${h.summary}</p><div class="learn">View educational profile →</div></article>`}).join("");count.textContent=`${items.length} herb${items.length===1?"":"s"}`;empty.hidden=items.length!==0;grid.querySelectorAll(".herb-card").forEach(c=>c.addEventListener("click",()=>openHerb(+c.dataset.index)))}
+function openHerb(i){const h=herbs[i];modalBody.innerHTML=`<div class="herb-icon">${h.icon}</div><h2>${h.name}</h2><p class="scientific">${h.scientific}</p><p><strong>Category:</strong> ${h.category}</p><p>${h.summary}</p><h3>Traditional / educational information</h3><ul>${h.uses.map(x=>`<li>${x}</li>`).join("")}</ul><h3>Safety</h3><p>${h.safety}</p><p class="modal-note"><strong>Important:</strong> This profile is educational. It is not a diagnosis or treatment recommendation.</p>`;modal.classList.add("show");modal.setAttribute("aria-hidden","false")}
+function closeModal(){modal.classList.remove("show");modal.setAttribute("aria-hidden","true")}document.getElementById("close").addEventListener("click",closeModal);modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});search.addEventListener("input",render);document.getElementById("menuBtn").addEventListener("click",()=>document.getElementById("nav").classList.toggle("open"));document.querySelectorAll("nav a").forEach(a=>a.addEventListener("click",()=>document.getElementById("nav").classList.remove("open")));render();
